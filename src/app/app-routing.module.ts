@@ -18,13 +18,16 @@ import { AuthGuard } from './services/auth_guard.service';
 import { PageNotFoundComponent }  from './pages/404/page-not-found.component';
 
 export const routes: Routes = [
-  //Important: The sequence of path is important as the router go over then in sequential manner
+  // Important: The sequence of path is important as the router go over then in sequential manner
+  // el path: '' es el defecto, normalmente indica el sitio donde se irá si la url está vacia
   { path: '', redirectTo: '/home/dashboard/order', pathMatch: 'full' },
   {
     path: 'home',
     component: HomeComponent,
-    canActivate:[AuthGuard],
-    children:[  // Children paths are appended to the parent path
+    //canActivate() guard method to redirect anonymous users to the login page when they try to enter the admin area.
+    //Si el usuario ya está logeado (en sessionStorage), pasa directamente a home
+    canActivate: [AuthGuard],
+    children: [  // Children paths are appended to the parent path
         { path: '', redirectTo: '/home/dashboard/order', pathMatch: 'full', data:[{selectedHeaderItemIndex:1, selectedSubNavItemIndex:-1}] },  // Default path (if no deep path is specified for home component like webui/home then it will by default show ProductsComponent )
         {
             path     : 'dashboard',
@@ -49,8 +52,10 @@ export const routes: Routes = [
 
 ];
 @NgModule({
-  imports: [ RouterModule.forRoot(routes, {useHash:true} )],
+  // enableTracing permite ver en consola del navegador el paso por las rutas
+  // elimnar enableTracing en produccion
+  imports: [ RouterModule.forRoot(routes, {useHash: true, enableTracing: true} )],
   exports: [ RouterModule ],
-  declarations:[PageNotFoundComponent]
+  declarations: [ PageNotFoundComponent]
 })
 export class AppRoutingModule {}

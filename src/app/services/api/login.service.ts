@@ -7,15 +7,15 @@ import 'rxjs/add/operator/catch';
 import { UserInfoService, LoginInfoInStorage} from '../user-info.service';
 import { ApiRequestService } from './api-request.service';
 
-export interface LoginRequestParam{
-    username:string;
-    password:string;
+export interface LoginRequestParam {
+    username: string;
+    password: string;
 }
 
 @Injectable()
 export class LoginService {
 
-    public landingPage:string = "/home/dashboard/order";
+    public landingPage: string = "/home/dashboard/order";
     constructor(
         private router:Router,
         private userInfoService: UserInfoService,
@@ -23,10 +23,10 @@ export class LoginService {
     ) {}
 
 
-    getToken(username:string, password:string): Observable<any> {
+    getToken(username: string, password: string): Observable<any> {
         let me = this;
 
-        let bodyData:LoginRequestParam = {
+        let bodyData: LoginRequestParam = {
             "username": username,
             "password": password,
         }
@@ -40,13 +40,14 @@ export class LoginService {
 
         */
 
-        let loginDataSubject:BehaviorSubject<any> = new BehaviorSubject<any>([]); // Will use this BehaviorSubject to emit data that we want after ajax login attempt
+        let loginDataSubject: BehaviorSubject <any> = new BehaviorSubject <any> ([]);
+        // Will use this BehaviorSubject to emit data that we want after ajax login attempt
         let loginInfoReturn:LoginInfoInStorage; // Object that we want to send back to Login Page
 
         this.apiRequest.post('session', bodyData)
             .subscribe(jsonResp => {
                 if (jsonResp !== undefined && jsonResp !== null && jsonResp.operationStatus === "SUCCESS"){
-                    //Create a success object that we want to send back to login page
+                    // Create a success object that we want to send back to login page
                     loginInfoReturn = {
                         "success"    : true,
                         "message"    : jsonResp.operationMessage,

@@ -1,4 +1,4 @@
-import { Component, OnInit,TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { EmployeeService } from '../../services/api/employee.service';
 
@@ -14,8 +14,9 @@ export class EmployeesComponent implements OnInit {
     columns:any[];
     rows:any[];
 
-    constructor(private router: Router, private employeeService: EmployeeService) { }
-
+    // constructor(private router: Router, private employeeService: EmployeeService) { }
+    constructor(private employeeService: EmployeeService) { }
+    
     ngOnInit() {
         var me = this;
         me.getPageData();
