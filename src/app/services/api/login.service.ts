@@ -45,7 +45,8 @@ export class LoginService {
         let loginInfoReturn:LoginInfoInStorage; // Object that we want to send back to Login Page
 
         this.apiRequest.post('session', bodyData)
-            .subscribe(jsonResp => {
+            .subscribe(
+            jsonResp => {
                 if (jsonResp !== undefined && jsonResp !== null && jsonResp.operationStatus === "SUCCESS"){
                     // Create a success object that we want to send back to login page
                     loginInfoReturn = {

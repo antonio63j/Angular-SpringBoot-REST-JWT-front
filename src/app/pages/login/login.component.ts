@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
                     this.router.navigate([resp.landingPage]);
                 },
                 errResponse => {
+                  console.log(`Respuesta con error ${errResponse.status} desde el back`);  
                   switch(errResponse.status){
                     case 401:
                       this.errMsg = 'Username or password is incorrect';
