@@ -1,6 +1,43 @@
-[![Backers on Open Collective](https://opencollective.com/angular-springboot-rest-jwt/backers/badge.svg)](#backers) [![Sponsors on Open Collective](https://opencollective.com/angular-springboot-rest-jwt/sponsors/badge.svg)](#sponsors)
+Visitar la versión original para ver la instalación y estado del proyecto
+
 [![Build Status](https://travis-ci.org/mrin9/Angular-SpringBoot-REST-JWT.svg?branch=master)](https://travis-ci.org/mrin9/Angular-SpringBoot-REST-JWT)
 
+#### Versiones de las herramientas con las que se ha podido arrancar
+
+Angular CLI: 1.7.2
+
+Node: 8.16.0
+
+OS: win32 x64
+
+Angular: 5.2.2
+
+... animations, common, compiler, compiler-cli, core, forms
+
+... http, language-service, platform-browser
+
+... platform-browser-dynamic, router
+
+
+@angular/cli: 1.7.2
+
+@angular-devkit/build-optimizer: 0.3.2
+
+@angular-devkit/core: 0.3.2
+
+@angular-devkit/schematics: 0.3.2
+
+@ngtools/json-schema: 1.2.0
+
+@ngtools/webpack: 1.10.1
+
+@schematics/angular: 0.3.2
+
+@schematics/package-update: 0.3.2
+
+typescript: 2.6.2
+
+webpack: 3.11.0
 
 ### Demo 
 I am hosting the app on free tire of google cloud and heroku. These instances shuts down automatically after some time of inactivity, and starts up when someone access it. This messesup the H2 memory db.
