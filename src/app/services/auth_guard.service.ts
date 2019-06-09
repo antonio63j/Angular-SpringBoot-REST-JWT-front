@@ -11,11 +11,15 @@ export class AuthGuard implements CanActivate, CanActivateChild {
         private loginService: LoginService,
         private userInfoService: UserInfoService
     ) { }
-
+// ActivatedRouteSnapshot:
+// Contains the information about a route associated with a component loaded in
+// an outlet at a particular moment in time. ActivatedRouteSnapshot can also be used to traverse the router state tree.
+// RouterStateSnapshot:
+// is a tree of activated route snapshots. Every node in this tree knows about
+// the "consumed" URL segments, the extracted parameters, and the resolved data.
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
         let url: string = state.url;
         return this.checkLogin(url);
-        //return true;
     }
 
     canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {

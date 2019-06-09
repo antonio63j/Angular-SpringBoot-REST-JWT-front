@@ -29,8 +29,7 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
     children: [  // Children paths are appended to the parent path
         { path: '', redirectTo: '/home/dashboard/order', pathMatch: 'full', data:[{selectedHeaderItemIndex:1, selectedSubNavItemIndex:-1}] },  // Default path (if no deep path is specified for home component like webui/home then it will by default show ProductsComponent )
-        {
-            path     : 'dashboard',
+        {   path     : 'dashboard',
             component: DashboardComponent,
             data     : [{selectedHeaderItemIndex:0, selectedSubNavItemIndex:-1}],
             children :[

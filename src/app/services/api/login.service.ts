@@ -40,12 +40,13 @@ export class LoginService {
 
         */
 
-        let loginDataSubject: BehaviorSubject <any> = new BehaviorSubject <any> ([]);
+        const loginDataSubject: BehaviorSubject <any> = new BehaviorSubject <any> ([]);
         // Will use this BehaviorSubject to emit data that we want after ajax login attempt
         let loginInfoReturn:LoginInfoInStorage; // Object that we want to send back to Login Page
 
         this.apiRequest.post('session', bodyData)
-            .subscribe(jsonResp => {
+            .subscribe(
+            jsonResp => {
                 if (jsonResp !== undefined && jsonResp !== null && jsonResp.operationStatus === "SUCCESS"){
                     // Create a success object that we want to send back to login page
                     loginInfoReturn = {
@@ -80,7 +81,6 @@ export class LoginService {
                 "landingPage": "/login"
               };
             });
-
             return loginDataSubject;
     }
 
