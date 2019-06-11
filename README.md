@@ -1,8 +1,17 @@
-Visitar la versión original para ver la instalación y estado del proyecto
 
+Visitar la versión original para ver la instalación y estado del proyecto   
 [![Build Status](https://travis-ci.org/mrin9/Angular-SpringBoot-REST-JWT.svg?branch=master)](https://travis-ci.org/mrin9/Angular-SpringBoot-REST-JWT)
 
-#### Versiones de las herramientas con las que se ha podido arrancar
+## Origen y objetivo de este proyecto
+Este proyecto se inicia a partir de [este otro](https://github.com/mrin9/Angular-SpringBoot-REST-JWT). Los objetivos de este proyecto son:
+
+* Partiendo del proyecto original, separaremos la parte front y la de back en dos proyectos. En el proyecto original la parte front se encuentra en el path webui.
+* El proyecto para back se puede ver [aquí] (https://github.com/antonio63j/Angular-SpringBoot-REST-JWT-back)
+
+* Pasar de una base de datos en memoria a MySQL
+
+
+## Versiones de las herramientas front con las que se ha podido arrancar
 
 Angular CLI: 1.7.2
 
@@ -39,37 +48,42 @@ typescript: 2.6.2
 
 webpack: 3.11.0
 
-### Demo 
+## Demo para desarrolladores sobre proyecto original
 I am hosting the app on free tire of google cloud and heroku. These instances shuts down automatically after some time of inactivity, and starts up when someone access it. This messesup the H2 memory db.
 
 the Heroku instance can automatically restart the app includining the H2 database, so if login is not working in google cloud instance try Heroku instance, the startup takes a long time so be patient.
 
-#### Google Cloud Hosted
+### Google Cloud Hosted (obsoleto)
 - [WebApp](http://104.196.240.40:9119)
 - [Api Doc (swagger)](http://104.196.240.40:9119/swagger/index.html)
 - [Api Doc (redoc)](http://104.196.240.40:9119/redoc/index.html)
 
-#### Heroku Hosted
+### Heroku Hosted
 - [WebApp](https://infomud.herokuapp.com/)
 - [Api Doc (swagger)](https://infomud.herokuapp.com/swagger/index.html)
 
-## Angular 5+ Frontent with SpringBoot (Java) Backend
-Application to demonstrate various parts of a service oriented RESTfull application. 
+## Todas las herramientas
 
-### Technology Stack
+### En front
 Component         | Technology
 ---               | ---
 Frontend          | [Angular 5](https://github.com/angular/angular)
+Client Build Tools| [angular-cli](https://github.com/angular/angular-cli), Webpack, npm
+
+### En back
+Component         | Technology
+---               | ---
 Backend (REST)    | [SpringBoot](https://projects.spring.io/spring-boot) (Java)
 Security          | Token Based (Spring Security and [JWT](https://github.com/auth0/java-jwt) )
 REST Documentation| [Swagger UI / Springfox](https://github.com/springfox/springfox) and [ReDoc](https://github.com/Rebilly/ReDoc)
 REST Spec         | [Open API Standard](https://www.openapis.org/) 
-In Memory DB      | H2 
+~~In Memory DB~~      | ~~H2~~ MYSQL
 Persistence       | JPA (Using Spring Data)
-Client Build Tools| [angular-cli](https://github.com/angular/angular-cli), Webpack, npm
 Server Build Tools| Maven(Java) or Gradle
 
-## Folder Structure
+
+
+## Folder Structure del proyecto original
 ```bash
 PROJECT_FOLDER
 │  README.md
@@ -90,7 +104,7 @@ PROJECT_FOLDER
 │     └──[webui]         #webui folder is created by (maven/gradle) which copies webui/dist folder 
 │                        #the application.properties file list webui as a resource folder that means files can be accesses http://localhost/<files_inside_webui> 
 │
-└──[webui]
+└──[webui] (en app orginal)
    │  package.json     
    │  angular-cli.json   #ng build configurations)
    └──[node_modules]
@@ -110,9 +124,9 @@ Ensure you have this installed before proceeding further
 This is an RESTfull implementation of an order processing app based on Northwind database schema from Microsoft.
 The goal of the project is to 
 - Highlight techniques of making and securing a REST full app using [SpringBoot](https://projects.spring.io/spring-boot)
-- How to consume an RESTfull service and make an HTML5 based Single Page App using [Angular 4+](https://github.com/angular/angular)
+- How to consume an RESTfull service and make an HTML5 based Single Page App using [Angular 5](https://github.com/angular/angular)
 
-### Features of the Project
+## Features of the Project
 * Backend
   * Token Based Security (using Spring security)
   * API documentation and Live Try-out links with Swagger 
@@ -132,20 +146,20 @@ The goal of the project is to
   * How to build all in one app that includes (database, sample data, RESTfull API, Auto generated API Docs, frontend and security)
   * Portable app, Ideal for dockers, cloud hosting.
 
-## In Memory DB (H2)
-I have included an in-memory database for the application. Database schema and sample data for the app is created everytime the app starts, and gets destroyed after the app stops, so the changes made to to the database are persistent only as long as the app is running
-<br/>
+## ~~In Memory DB (H2)~~ DB MySql
+
+~~I have included an in-memory database for the application. Database schema and sample data for the app is created everytime the app starts, and gets destroyed after the app stops, so the changes made to to the database are persistent only as long as the app is running.~~
+
 Creation of database schema and data are done using sql scripts that Springs runs automatically. 
+
 To modify the database schema or the data you can modify [schema.sql](./src/main/resources/schema.sql) and [data.sql](./src/main/resources/data.sql) which can be found at `/src/main/resources`
 
 ## Spring security
 Security is **enabled** by default, to disable, you must comment [this line](./src/main/java/com/app/config/SecurityConfig.java#L15) in `src/main/java/com/config/SecurityConfig.java`<br/>
 When security is enabled, none of the REST API will be accessesble directly.
 
-To test security access `http://localhost:9119/version` API and you should get a forbidden/Access denied error. 
-In order to access these secured API you must first obtain a token. Tokens can be obtained by passing a valid userid/password
-
-userid and password are stored in H2 database. To add/remove users, modify the [data.sql](./src/main/resources/data.sql#L3)
+To test security access `http://localhost:9119/version` API and you should get a forbidden/Access denied error.<br/>
+In order to access these secured API you must first obtain a token. Tokens can be obtained by passing a valid userid/password, userid and password are stored in ~~H2~~ database. To add/remove users, modify the [data.sql](./src/main/resources/data.sql#L3)
 couple of valid users and their passwords are `demo\demo` and `admin\admin`
 <br/>
 
@@ -162,26 +176,27 @@ after receiving this token you must provide the token in the request-header of e
 curl command (replace xxx.xxx.xxx with the token that you received in above command) and you should be able to access the API.
 ```
 curl -X GET --header 'Accept: application/json' --header 'Authorization: xxx.xxx.xxx' 'http://localhost:9119/version'
-``` 
+```
 
-### Build Frontend (optional step)
+## Build Frontend (optional step)
 Code for frontend is allready compiled and saved under the ```webui/dist``` 
 when building the backend app (using maven) it will pickup the code from ```webui/dist```. However if you modified the frontend code and want your changes to get reflected then you must build the frontend 
 ```bash
-# Navigate to PROJECT_FOLDER/webui (should contain package.json )
+### Navigate to PROJECT_FOLDER/webui (should contain package.json )
 npm install
 # build the project (this will put the files under dist folder)
-ng build --prod --aot=true
+ng build --prod --aot=true (en proyecto original)
+npm run-script ng build --prod --base-href /Angular-SpringBoot-REST-JWT/ (solo front)
 ```
 
-### Build Backend (SpringBoot Java)
+## Build Backend (SpringBoot Java)
 ```bash
-# Maven Build : Navigate to the root folder where pom.xml is present 
+Maven Build : Navigate to the root folder where pom.xml is present 
 mvn clean install
 
-#OR
+OR
 
-# Gradle Build : Navigate to the root folder where build.gradle is present 
+Gradle Build : Navigate to the root folder where build.gradle is present 
 gradle build
 ```
 
@@ -256,28 +271,5 @@ curl -X GET --header 'Accept: application/json' --header 'Authorization: [replac
 
 This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].
 <a href="graphs/contributors"><img src="https://opencollective.com/angular-springboot-rest-jwt/contributors.svg?width=890" /></a>
-
-
-## Backers
-
-Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/angular-springboot-rest-jwt#backer)]
-
-<a href="https://opencollective.com/angular-springboot-rest-jwt#backers" target="_blank"><img src="https://opencollective.com/angular-springboot-rest-jwt/backers.svg?width=890"></a>
-
-
-## Sponsors
-
-Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/angular-springboot-rest-jwt#sponsor)]
-
-<a href="https://opencollective.com/angular-springboot-rest-jwt/sponsor/0/website" target="_blank"><img src="https://opencollective.com/angular-springboot-rest-jwt/sponsor/0/avatar.svg"></a>
-<a href="https://opencollective.com/angular-springboot-rest-jwt/sponsor/1/website" target="_blank"><img src="https://opencollective.com/angular-springboot-rest-jwt/sponsor/1/avatar.svg"></a>
-<a href="https://opencollective.com/angular-springboot-rest-jwt/sponsor/2/website" target="_blank"><img src="https://opencollective.com/angular-springboot-rest-jwt/sponsor/2/avatar.svg"></a>
-<a href="https://opencollective.com/angular-springboot-rest-jwt/sponsor/3/website" target="_blank"><img src="https://opencollective.com/angular-springboot-rest-jwt/sponsor/3/avatar.svg"></a>
-<a href="https://opencollective.com/angular-springboot-rest-jwt/sponsor/4/website" target="_blank"><img src="https://opencollective.com/angular-springboot-rest-jwt/sponsor/4/avatar.svg"></a>
-<a href="https://opencollective.com/angular-springboot-rest-jwt/sponsor/5/website" target="_blank"><img src="https://opencollective.com/angular-springboot-rest-jwt/sponsor/5/avatar.svg"></a>
-<a href="https://opencollective.com/angular-springboot-rest-jwt/sponsor/6/website" target="_blank"><img src="https://opencollective.com/angular-springboot-rest-jwt/sponsor/6/avatar.svg"></a>
-<a href="https://opencollective.com/angular-springboot-rest-jwt/sponsor/7/website" target="_blank"><img src="https://opencollective.com/angular-springboot-rest-jwt/sponsor/7/avatar.svg"></a>
-<a href="https://opencollective.com/angular-springboot-rest-jwt/sponsor/8/website" target="_blank"><img src="https://opencollective.com/angular-springboot-rest-jwt/sponsor/8/avatar.svg"></a>
-<a href="https://opencollective.com/angular-springboot-rest-jwt/sponsor/9/website" target="_blank"><img src="https://opencollective.com/angular-springboot-rest-jwt/sponsor/9/avatar.svg"></a>
 
 

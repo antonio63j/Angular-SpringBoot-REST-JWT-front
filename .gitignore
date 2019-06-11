@@ -5,6 +5,7 @@ bin/
 .gradle/
 .classpath
 dist/
+np-debug.log
 
 # WebUI Builds
 tmp/
